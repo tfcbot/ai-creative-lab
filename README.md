@@ -1,10 +1,8 @@
 # ai-creative-lab
 
-Workflows from **AI Creative Lab** livestreams, installable as Claude Code plugins.
+A marketplace of AI video skills from the **AI Creative Lab** livestream. Install only the skills you want.
 
-Each episode of the stream ships a plugin: the exact prompts, skills, and workflow demonstrated live, packaged so you can install it and run it yourself.
-
-## Install the marketplace
+## Install the marketplace (once)
 
 In Claude Code:
 
@@ -12,26 +10,59 @@ In Claude Code:
 /plugin marketplace add tfcbot/ai-creative-lab
 ```
 
-## Browse and install plugins
+## Install a specific skill
 
-Open the plugin manager:
+```
+/plugin install <skill>@ai-creative-lab
+/reload-plugins
+```
+
+Each skill is its own plugin, so you only get what you pick.
+
+## Browse what's available
 
 ```
 /plugin
 ```
 
-Or install a specific plugin directly:
+Open the plugin manager and go to the **Discover** tab.
+
+## Update
 
 ```
-/plugin install <plugin-name>@ai-creative-lab
+/plugin marketplace update ai-creative-lab
 ```
 
-After installing, run `/reload-plugins` to activate.
+Pulls new skills published since you last updated.
 
-## What's inside
+## Remove a skill
 
-Plugins are added as each livestream episode airs. Check the [Marketplaces tab](#install-the-marketplace) in `/plugin` after running `/plugin marketplace update ai-creative-lab` to see the latest.
+```
+/plugin uninstall <skill>@ai-creative-lab
+```
+
+## Cross-agent install (Cursor, Codex, OpenCode, etc.)
+
+Skills can also be installed via the [vercel-labs skills CLI](https://github.com/vercel-labs/skills):
+
+```
+npx skills add tfcbot/ai-creative-lab --skill <skill>
+```
+
+This copies raw SKILL.md files into the agent's skills directory and invokes them flat (`/<skill>` instead of `/<skill>:<skill>`).
+
+## Repo layout
+
+Each skill lives in its own folder under `skills/` with two files:
+
+```
+skills/<name>/
+├── .claude-plugin/plugin.json    # marks the folder as a Claude Code plugin
+└── SKILL.md                      # the workflow itself
+```
+
+The marketplace manifest at `.claude-plugin/marketplace.json` lists every skill as its own plugin entry.
 
 ## The show
 
-AI Creative Lab is a livestream about building with AI video tools, models, and agent workflows. Every episode produces a reusable skill — this repo is where those skills live.
+AI Creative Lab is a livestream about building with AI video tools and agent workflows. Skills from the stream land here.

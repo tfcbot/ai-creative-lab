@@ -1,5 +1,12 @@
 {
   "name": "ai-creative-lab",
   "owner": { "name": "AI Creative Lab" },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "hello",
+      "source": "./skills/hello",
+      "description": "Example skill — greets the user",
+      "version": "1.0.0"
+    }
+  ]
 }
