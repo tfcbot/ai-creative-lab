@@ -2,6 +2,5 @@
   "name": "hello",
   "description": "Example skill — greets the user",
   "version": "1.0.0",
-  "author": { "name": "AI Creative Lab" },
-  "skills": ["./"]
+  "author": { "name": "AI Creative Lab" }
 }
