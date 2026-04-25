@@ -3,7 +3,7 @@
 // Source of truth: skills/. Plugins tree is regenerated on every run.
 // Run before committing any change to skills/.
 
-import { readdirSync, statSync, existsSync, mkdirSync, copyFileSync, writeFileSync, readFileSync } from "node:fs";
+import { readdirSync, statSync, existsSync, mkdirSync, copyFileSync, writeFileSync, readFileSync, cpSync, rmSync } from "node:fs";
 import { join } from "node:path";
 
 const repoRoot = new URL("..", import.meta.url).pathname;
@@ -32,8 +32,11 @@ for (const name of skillNames) {
   const destSkill = join(destSkillDir, "SKILL.md");
 
   mkdirSync(join(pluginRoot, ".claude-plugin"), { recursive: true });
+  // Wipe and recreate destSkillDir so removed source files don't linger.
+  if (existsSync(destSkillDir)) rmSync(destSkillDir, { recursive: true, force: true });
   mkdirSync(destSkillDir, { recursive: true });
-  copyFileSync(srcSkill, destSkill);
+  // Recursively copy the entire skill source tree (SKILL.md + any references/, recipes/, etc.).
+  cpSync(join(skillsDir, name), destSkillDir, { recursive: true });
 
   let manifest: { name: string; description: string; version: string; author?: { name: string } };
   if (existsSync(pluginManifestPath)) {
