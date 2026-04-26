@@ -2,4 +2,14 @@
 node_modules/
 .env
 .env.local
+.env.*.local
 *.log
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# Skill output dirs (per ETHOS rule 7: <skill>-<timestamp>/ in CWD)
+# Defensive — skills should produce files in user CWD, not the repo.
+*-2*/
