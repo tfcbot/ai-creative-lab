@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# AI Creative Lab — post-install setup
+# Validates skill structure and prints next-step prompt for the user.
+
+set -e
+
+REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
+cd "$REPO_ROOT"
+
+echo "✓ AI Creative Lab installed at $REPO_ROOT"
+echo ""
+
+# Find every top-level dir with a SKILL.md
+SKILLS=()
+for dir in */; do
+  dir="${dir%/}"
+  case "$dir" in
+    docs|lib|scripts|test|examples|node_modules|.git) continue ;;
+  esac
+  if [ -f "$dir/SKILL.md" ]; then
+    SKILLS+=("$dir")
+  fi
+done
+
+if [ ${#SKILLS[@]} -eq 0 ]; then
+  echo "⚠  No SKILL.md files found at the top level."
+  echo "   Expected layout: <skill-name>/SKILL.md"
+  exit 1
+fi
+
+echo "Available skills:"
+for skill in "${SKILLS[@]}"; do
+  # Extract description from frontmatter (first line starting with description:)
+  desc=$(awk '/^description:/{sub(/^description: */,""); print; exit}' "$skill/SKILL.md")
+  printf "  /%-20s — %s\n" "$skill" "$desc"
+done
+
+echo ""
+echo "Set provider API keys before running. See docs/PROVIDERS.md."
+echo ""
+echo "Run a skill in Claude Code with its slash command (e.g. /${SKILLS[0]})."
