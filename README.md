@@ -1,10 +1,10 @@
 # AI Creative Agency
 
-**An AI creative agency in your terminal.** Researches niches and
+**An AI creative agency, run by your agent.** Researches niches and
 trends, produces AI videos and carousels, clones winning ads, edits
 captions and overlays, schedules and engages across 14 social
-platforms, runs paid campaigns, and reports back — all packaged as
-Claude Code skills your agent runs for you.
+platforms, runs paid campaigns, and reports back — every skill is one
+command your agent invokes on your behalf.
 
 Built for the operator running AI content across brand, organic, paid,
 theme pages, and clipping. Eighty skills across nine provider lanes.
