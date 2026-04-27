@@ -91,6 +91,8 @@ registers with each. Use `--host <name>` to target one explicitly.
 - [`/clone-ad`](clone-ad/SKILL.md) — 15s AI clone of a reference ad for your product
 - [`/generate-video`](generate-video/SKILL.md) — one AI video from an idea (Seedance 2.0 / Kling 3.0 / Sora 2)
 - [`/generate-image`](generate-image/SKILL.md) — one AI image from an idea (Nano Banana 2 / GPT-Image 2)
+- [`/hyperreal-image`](hyperreal-image/SKILL.md) — photorealistic image that doesn't read as AI (Nano Banana 2 with skin/eyes/hair micro-rules + standard negative prompt)
+- [`/hyperreal-video`](hyperreal-video/SKILL.md) — photorealistic video locked to a start image (Kling 3.0 default, image-to-video only, subtle motion vocabulary)
 - [`/generate-carousel`](generate-carousel/SKILL.md) — 3–10 slide Instagram carousel
 - [`/wide-cam-podcast`](wide-cam-podcast/SKILL.md) — ~60s wide-cam two-host AI podcast clip
 - [`/generate-talking-head`](generate-talking-head/SKILL.md) — talking-head UGC clip from character + script

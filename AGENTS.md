@@ -15,6 +15,8 @@ end-to-end workflow that ships a finished output.
 | `/generate-talking-head` | Talking-head UGC clip from a character spec and a script — start frame (Nano Banana 2), voiceover (ElevenLabs), lip-synced clip (Kling). |
 | `/generate-video` | One AI video from an idea. Refines the prompt, picks the model (Seedance 2.0 / Kling 3.0 / Sora 2), generates the MP4 via Wavespeed. |
 | `/generate-image` | One AI image from an idea. Refines the prompt, picks the model (Nano Banana 2 / GPT-Image 2), generates the PNG via Wavespeed. |
+| `/hyperreal-image` | Photorealistic image that doesn't read as AI. Bakes in mandatory skin/eyes/hair micro-rules, single-light aesthetic, and the standard negative prompt for Nano Banana 2. |
+| `/hyperreal-video` | Photorealistic video locked to a start image. Image-to-video only, defaults to Kling 3.0 for character continuity, subtle motion vocabulary tuned for candid believability. |
 
 ### Research & intelligence
 
