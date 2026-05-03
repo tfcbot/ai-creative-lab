@@ -119,11 +119,9 @@ Take a `voice_id` (from ElevenLabs), a script (string), and a video file (mp4/mo
 
 4. **`-shortest` cuts video to VO duration if you swap the args.** The pattern `ffmpeg -i video.mp4 -i vo.mp3 ... -shortest` plus `apad` on the audio side will preserve full video length only if the apad'd audio is longer than the video. Always `apad` the audio.
 
-5. **TikTok Shop CTAs are vernacular.** Writers default to "go grab a tub" / "click the link below" — real creators say "tap the orange cart", "linked below", "ran to grab mine", "I'll link it". When the user asks for a CTA closer, draft in TikTok-creator vernacular by default.
+5. **Dead space at the end reads as unfinished.** A 15s ad with a VO that ends at 11s shows the viewer 4 seconds of held-product silence. Either extend the script with a closer that maps to whatever's on screen during that window (use VidJutsu `/v1/watch` to identify the visual beat), or trim the video.
 
-6. **Dead space at the end reads as unfinished.** A 15s ad with a VO that ends at 11s shows the viewer 4 seconds of held-product silence. Either extend the script with a closer that maps to whatever's on screen during that window (use VidJutsu `/v1/watch` to identify the visual beat), or trim the video.
-
-7. **Upload to VidJutsu CDN, not the bare Higgsfield/Wavespeed CDN.** Source CDNs rotate or expire (Higgsfield CloudFront has a 7-day TTL). VidJutsu URLs persist. For anything the user will share or re-publish, always upload.
+6. **Upload to VidJutsu CDN, not the bare Higgsfield/Wavespeed CDN.** Source CDNs rotate or expire (Higgsfield CloudFront has a 7-day TTL). VidJutsu URLs persist. For anything the user will share or re-publish, always upload.
 
 ## Reference run
 
