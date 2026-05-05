@@ -4,8 +4,8 @@ description: Generate a 15s UGC b-roll-style social ad from any product PDP URL 
 requires:
   env:
     - VIDJUTSU_API_KEY
-  mcp:
-    - claude.ai Higgsfield (show_marketing_studio, generate_video, job_status)
+  cli:
+    - higgsfield (install via `curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh`, auth via `higgsfield auth login`)
   skills:
     - kalopilot (for the Kalodata research step)
 ---
@@ -27,20 +27,38 @@ Produce a single 15s 9:16 UGC b-roll video for any product PDP URL Higgsfield Ma
 
 ## Pipeline (run sequentially)
 
-1. **Ingest the product** via Higgsfield MCP `show_marketing_studio` with `type=product` and the user's URL. Verify `status: completed` in the response. **If `status: failed`, stop immediately and tell the user the URL could not be ingested by Higgsfield Marketing Studio — ask them to provide a different link that the scraper can handle.** Do not attempt workarounds or retries; this is a hard requirement.
+1. **Ingest the product** via the Higgsfield CLI:
+
+   ```bash
+   higgsfield marketing-studio products fetch --url <pdp-url> --wait --json
+   ```
+
+   Capture `id` and verify `status: completed`. **If `status: failed`, stop immediately and tell the user the URL could not be ingested by Higgsfield Marketing Studio — ask them to provide a different link that the scraper can handle.** Do not attempt workarounds or retries; this is a hard requirement.
 
 2. **Run Kalodata research** via the `kalopilot` skill. Send a query like:
    > For US TikTok Shop product ID `<numeric_id>` (or brand/keyword if not on TikTok Shop), find the top 5 highest-GMV creator videos in the last 30 days. For each: GMV, views, length, and a one-sentence description of the format/hook. Then summarize the single winning format pattern in one paragraph.
 
    Use the result to inform the script's hook, b-roll vocabulary, and pacing.
 
-3. **Generate the video** via Higgsfield MCP `generate_video` using the prompt template below.
+3. **Generate the video** via the Higgsfield CLI using the prompt template below:
 
-4. **Poll** `job_status` with `sync: true` until status is terminal (`completed`, `failed`, or `nsfw`). Marketing Studio video typically takes 3–5 minutes.
+   ```bash
+   higgsfield generate create marketing_studio_video \
+     --prompt "<filled prompt template>" \
+     --product_ids '[<product_id>]' \
+     --avatars '[{"id":"cd6fb78c-e1a2-42f1-8b1e-902c15511877","type":"preset"}]' \
+     --mode ugc \
+     --duration 15 \
+     --resolution 720p \
+     --aspect_ratio 9:16 \
+     --wait --wait-timeout 15m --json
+   ```
 
-5. **QA gate via VidJutsu critic** — POST `https://api.vidjutsu.ai/v1/watch` with the rendered `rawUrl` and a prompt that checks: any speaking mouth, any spoken audio, any burned-in captions, product flavor accuracy, anatomy artifacts. Require a 1–10 score and pass/fail.
+   `--wait` blocks until terminal status; the result URL is in the JSON output. Marketing Studio video typically takes 3–5 minutes.
 
-6. **Refine if score < 8** — tighten the negative prompt or pin the avatar more aggressively, then retry once. If a second attempt still fails, surface to the user rather than burning more attempts.
+4. **QA gate via VidJutsu critic** — POST `https://api.vidjutsu.ai/v1/watch` with the rendered `rawUrl` and a prompt that checks: any speaking mouth, any spoken audio, any burned-in captions, product flavor accuracy, anatomy artifacts. Require a 1–10 score and pass/fail.
+
+5. **Refine if score < 8** — tighten the negative prompt or pin the avatar more aggressively, then retry once. If a second attempt still fails, surface to the user rather than burning more attempts.
 
 ## Defaults
 
