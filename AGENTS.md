@@ -11,6 +11,7 @@ end-to-end workflow that ships a finished output.
 |---|---|
 | `/clone-ad` | 15-second AI clone of a reference ad for your own product. Reference fetched (Scrape Creators) or local MP4, analyzed (Gemini), shot list rewritten for the product, generated (Wavespeed Nano Banana 2 + Seedance 2.0), verified against the reference's shot density. |
 | `/generate-carousel` | 3–10 slide Instagram carousel. Niche research, format pattern detection, slide JSON specs, single-pass image generation (Wavespeed gpt-image-2) with typography baked in, caption draft, publish or save as drafts (Zernio). |
+| `/newsjack-carousel` | 6–8 slide reaction/announcement carousel from any social post URL. Scrape Creators pulls the topic post (video / reel / carousel / image), Gemini analyzes what's being announced, slides written in the user's brand voice with optional 2nd-URL format clone, generated via Wavespeed gpt-image-2, hosted on VidJutsu CDN, published via Zernio. |
 | `/wide-cam-podcast` | ~60-second wide-cam two-host AI podcast clip. Characters and set defined as JSON, starting frames generated (Wavespeed gpt-image-2 or Nano Banana 2), clips generated (Seedance 2.0), optional VidJutsu compliance scan, fine-print disclaimer burn. |
 | `/generate-talking-head` | Talking-head UGC clip from a character spec and a script — start frame (Nano Banana 2), voiceover (ElevenLabs), lip-synced clip (Kling). |
 | `/generate-video` | One AI video from an idea. Refines the prompt, picks the model (Seedance 2.0 / Kling 3.0 / Sora 2), generates the MP4 via Wavespeed. |
