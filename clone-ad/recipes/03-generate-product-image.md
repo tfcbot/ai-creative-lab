@@ -34,17 +34,22 @@ Produce a clean product hero shot at `product/product.png` that Seedance can use
    no other objects in the frame.
    ```
 
-5. Call Wavespeed Nano Banana 2 per `references/wavespeed-nano-banana-2.md`:
+5. **Pick the model:**
+
+   - **Nano Banana 2 (default)** — product-only hero shot, no people in frame, no typography on the label that needs to read. Cleaner edges on white seamless. See `references/wavespeed-nano-banana-2.md`.
+   - **GPT Image 2** — start frame includes a person + a brand-labeled product, OR the product has a wordmark on the label that must read. Renders typography much more cleanly than Nano Banana. See `references/wavespeed-gpt-image-2.md` (different schema — `aspect_ratio` + `resolution`, NOT `size`).
+
+   Call the chosen model:
 
    ```json
-   {
-     "prompt": "<the prompt>",
-     "size": "2048*2048",
-     "num_images": 1
-   }
+   // Nano Banana 2 (default)
+   { "prompt": "<the prompt>", "size": "2048*2048", "num_images": 1 }
+
+   // GPT Image 2 (typography or person+product)
+   { "prompt": "<the prompt>", "aspect_ratio": "9:16", "resolution": "1k", "quality": "medium", "num_images": 1 }
    ```
 
-   Poll, download, save to `product/product.png`. Save the prompt to `product/product-prompt.md`.
+   Poll, download, save to `product/product.png`. Save the prompt and which model you used to `product/product-prompt.md`.
 
 6. Inspect the result:
    - Pure white background, no environment
@@ -69,8 +74,8 @@ product/product-prompt.md
 
 ## Cost
 
-- ~$0.04 per image at 2048×2048
-- 30–90 seconds wall time per attempt
+- Nano Banana 2 — ~$0.04 per image at 2048×2048, 30–90s wall time
+- GPT Image 2 — ~$0.06 per image at 1k/medium, 20–60s wall time (~$0.22 at high quality, only needed for tight typography)
 
 ## Reuse
 
