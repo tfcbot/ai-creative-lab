@@ -44,7 +44,8 @@ Set up the project's working directory exactly as described in `references/folde
 - `references/product-image-rules.md` — what makes a Seedance-friendly product image (white seamless, studio lighting, text-on-product caveat)
 - `references/scrapecreators-social.md` — Meta / TikTok / Instagram media-fetch endpoints
 - `references/gemini-video-analysis.md` — Files API + generateContent for shot-list extraction
-- `references/wavespeed-nano-banana-2.md` — text-to-image for the product hero
+- `references/wavespeed-nano-banana-2.md` — text-to-image for the product hero (default — product-only)
+- `references/wavespeed-gpt-image-2.md` — text-to-image alternative when the start frame has a person or label typography that must read
 - `references/wavespeed-seedance-2.md` — image-to-video for the final clip
 - `references/verification-loop.md` — clone-vs-reference shot-density check
 
