@@ -70,7 +70,9 @@ async function fetchProfile(item: Item): Promise<{bio: string, bio_link: string 
     return {
       bio: j.user?.signature ?? "",
       bio_link: j.user?.bio_link?.link ?? null,
-      followers: j.user?.follower_count ?? 0,
+      // SC's TikTok profile endpoint returns stats at the top level, not on `user`.
+      // `stats.followerCount` is a number; `statsV2.followerCount` is the same value as a string.
+      followers: j.stats?.followerCount ?? Number(j.statsV2?.followerCount ?? 0),
     };
   } else {
     return {
